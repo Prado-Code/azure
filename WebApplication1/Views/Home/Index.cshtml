@@ -1,6 +1,18 @@
-﻿@model string
+﻿@model List<customer>
 
-<form method="post" >
-<input class="form-control" name="value" >
-<button type="submit">submit</button>
-</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    @foreach(customer item in Model)
+    {
+        <tr>
+            <td> @item.Id</td>
+            <td>@item.Name</td>
+        </tr>
+    }
+</table>

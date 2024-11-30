@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Data;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers;
@@ -7,17 +9,30 @@ namespace WebApplication1.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
+        List<customer> customerlist;
+        try
+        {
+            customerlist = _context.Customers.ToList();
+        }
+        catch (Exception ex) {
+            
+            customerlist = new List<customer>();    
+        }
 
-        string model = "Hello, welcome to ASP.NET Core MVC!";
-        return View("Index",model);
+
+        
+
+        return View(customerlist);
     }
 
     [HttpPost]
