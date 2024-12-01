@@ -20,14 +20,11 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         List<customer> customerlist;
-        try
-        {
+       
+        
             customerlist = _context.Customers.ToList();
-        }
-        catch (Exception ex) {
-            
-            customerlist = new List<customer>();    
-        }
+        
+    
 
 
         
