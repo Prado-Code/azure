@@ -19,10 +19,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        List<customer> customerlist;
+        List<customer>? customerlist;
        
         
-            customerlist = _context.Customers.ToList();
+         customerlist = _context.Customers.ToList();
         
     
 
@@ -36,6 +36,20 @@ public class HomeController : Controller
     public IActionResult Index(string value)
     {
         return View("test",value);
+    }
+     
+
+    public IActionResult Create   ()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(customer obj)
+    {
+        _context.Customers.Add(obj);
+        _context.SaveChanges();
+        return View();
     }
 
 
